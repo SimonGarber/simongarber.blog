@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.heroVideo {
+  height: 100%;
+  width: 100%;
+}
+
 .heroImage {
   /*
     Ensure golden ratio for the hero size while limiting it to some extend to
@@ -24,13 +29,13 @@
   padding: 0 0.5em;
 }
 
-@media(min-width: 600px) {
+@media (min-width: 600px) {
   .heroDetails {
     font-size: 16px;
   }
 }
 
-@media(min-width: 1000px) {
+@media (min-width: 1000px) {
   .heroDetails {
     font-size: 20px;
   }
