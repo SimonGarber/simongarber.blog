@@ -2,10 +2,10 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
-import Hero from '../components/hero'
 import HeroVideo from '../components/heroVideo'
-import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
+import Navigation from '../components/navigation'
+import styles from './index.module.css'
 
 class RootIndex extends React.Component {
   render() {
@@ -15,15 +15,25 @@ class RootIndex extends React.Component {
       this,
       'props.data.allContentfulBackgroundVideo.edges'
     )
-    const [pageImage] = get(this, 'props.data.allContentfulPageImage.edges')
+
     return (
-      <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
+      <div className={styles.homeContainer}>
+        <header className={styles.header}>
+          <Navigation />
           <Helmet title={siteTitle} />
+        </header>
 
-          <HeroVideo data={backgroundVideo.node} />
+        <main className={styles.mainContainer}>
+          <section className={styles.titleSection}>
+            <div className={styles.titleContainer}>
+              <h1>Flow State</h1>
+            </div>
+            <div className={styles.videoContainer}>
+              <HeroVideo data={backgroundVideo.node} />
+            </div>
+          </section>
 
-          <div className="wrapper">
+          <div className={styles.wrapper}>
             <h2 className="section-headline">Recent articles</h2>
             <ul className="article-list">
               {posts.map(({ node }) => {
@@ -35,8 +45,8 @@ class RootIndex extends React.Component {
               })}
             </ul>
           </div>
-        </div>
-      </Layout>
+        </main>
+      </div>
     )
   }
 }

@@ -4,18 +4,22 @@ import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
-
+import styles from '../pages/index.module.css'
 import heroStyles from '../components/hero.module.css'
-
+import Navigation from '../components/navigation'
 class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
-      <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
-          <Helmet title={`${post.title} | ${siteTitle}`} />
+      <div className={styles.homeContainer}>
+        <header className={styles.header}>
+          <Navigation />
+          <Helmet title={siteTitle} />
+        </header>
+        <Helmet title={`${post.title} | ${siteTitle}`} />
+        <main className={styles.mainContainer}>
           <div className={heroStyles.hero}>
             <Img
               className={heroStyles.heroImage}
@@ -38,8 +42,8 @@ class BlogPostTemplate extends React.Component {
               }}
             />
           </div>
-        </div>
-      </Layout>
+        </main>
+      </div>
     )
   }
 }

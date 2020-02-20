@@ -6,7 +6,7 @@ import Navigation from './navigation'
 
 class Template extends React.Component {
   render() {
-    const { location, children } = this.props
+    const { location } = this.props
     let header
 
     let rootPath = `/`
@@ -15,10 +15,16 @@ class Template extends React.Component {
     }
 
     return (
-      <Container>
+      <header
+        style={{
+          position: 'fixed',
+          zIndex: '900',
+          display: 'block',
+          width: '100%',
+        }}
+      >
         <Navigation />
-        {children}
-      </Container>
+      </header>
     )
   }
 }

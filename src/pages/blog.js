@@ -2,21 +2,30 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
-import styles from './blog.module.css'
-import Layout from '../components/layout'
+import styles from './index.module.css'
+import Navigation from '../components/navigation'
 import ArticlePreview from '../components/article-preview'
 import Hero from '../components/hero'
+
 class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges')
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
     return (
-      <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
+      <div className={styles.homeContainer}>
+        <header className={styles.header}>
+          <Navigation />
           <Helmet title={siteTitle} />
-          <Hero data={author.node} />
-          <div className="wrapper">
+        </header>
+        <main className={styles.mainContainer}>
+          <section className={styles.titleSection}>
+            <div className={styles.titleContainer}>
+              <Hero data={author.node} />
+            </div>
+          </section>
+
+          <div className={styles.wrapper}>
             <h2 className="section-headline">Recent articles</h2>
             <ul className="article-list">
               {posts.map(({ node }) => {
@@ -28,8 +37,8 @@ class BlogIndex extends React.Component {
               })}
             </ul>
           </div>
-        </div>
-      </Layout>
+        </main>
+      </div>
     )
   }
 }
