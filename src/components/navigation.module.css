@@ -9,6 +9,10 @@
   font-size: 1.25em;
 }
 
+.navigation ul {
+  margin-right: 2rem;
+}
+
 .navigationItem {
   display: inline-flex;
   align-items: center;
@@ -16,5 +20,18 @@
 }
 
 .navigationItem a {
-  color: currentColor;
+  color: #eee;
+  text-decoration: none;
+  font-size: 20px;
+
+}
+
+@media (max-width: 946px) {
+  .navigationItem a {
+    color: black
+  }
+}
+
+.navigationItem a:hover {
+  color: goldenrod;
 }
