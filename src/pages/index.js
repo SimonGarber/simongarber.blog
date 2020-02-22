@@ -1,54 +1,53 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import get from 'lodash/get'
+import '../components/base.css'
 import Helmet from 'react-helmet'
 import HeroVideo from '../components/heroVideo'
 import ArticlePreview from '../components/article-preview'
 import Navigation from '../components/navigation'
+import Header from '../components/header'
 import styles from './index.module.css'
+import Article from '../components/Article'
 
-class RootIndex extends React.Component {
-  render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
-    const [backgroundVideo] = get(
-      this,
-      'props.data.allContentfulBackgroundVideo.edges'
-    )
+const RootIndex = ({ data }) => {
+  const siteTitle = data.site.siteMetadata.title
+  const posts = data.allContentfulBlogPost.edges
+  const [backgroundVideo] = data.allContentfulBackgroundVideo.edges
 
-    return (
-      <div className={styles.homeContainer}>
-        <header className={styles.header}>
-          <Navigation />
-          <Helmet title={siteTitle} />
-        </header>
+  return (
+    <div className={styles.homeContainer}>
+      <Header>
+        <Navigation />
+        <Helmet title={siteTitle} />
+      </Header>
 
-        <main className={styles.mainContainer}>
-          <section className={styles.titleSection}>
-            <div className={styles.titleContainer}>
-              <h1>Flow State</h1>
-            </div>
-            <div className={styles.videoContainer}>
-              <HeroVideo data={backgroundVideo.node} />
-            </div>
-          </section>
-
-          <div className={styles.wrapper}>
-            <h2 className="section-headline">Recent articles</h2>
-            <ul className="article-list">
-              {posts.map(({ node }) => {
-                return (
-                  <li key={node.slug}>
-                    <ArticlePreview article={node} />
-                  </li>
-                )
-              })}
-            </ul>
+      <main className={styles.mainContainer}>
+        <section className={styles.titleSection}>
+          <div className={styles.videoContainer}>
+            <HeroVideo data={backgroundVideo.node} />
           </div>
-        </main>
-      </div>
-    )
-  }
+        </section>
+
+        <div className={styles.wrapper}>
+          <h2 className="section-headline">Recent articles</h2>
+          <ul className="article-list">
+            {posts.map(({ node }) => {
+              return (
+                <li key={node.slug}>
+                  <ArticlePreview article={node} />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        {/*<div>
+          {posts.map(({ node }) => {
+            return <Article key={node.slug} article={node} />
+          })}
+        </div>*/}
+      </main>
+    </div>
+  )
 }
 
 export default RootIndex
@@ -68,8 +67,18 @@ export const pageQuery = graphql`
           publishDate(formatString: "MMMM Do, YYYY")
           tags
           heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+            fluid(
+              maxWidth: 400
+              maxHeight: 280
+              resizingBehavior: SCALE
+              background: "rgb:000000"
+            ) {
               ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
+          body {
+            childMarkdownRemark {
+              html
             }
           }
           description {
@@ -80,7 +89,6 @@ export const pageQuery = graphql`
         }
       }
     }
-
     allContentfulBackgroundVideo {
       edges {
         node {

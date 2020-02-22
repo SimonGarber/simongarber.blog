@@ -10,8 +10,19 @@
   width: 100%;
   z-index: 900;
   display: block;
+  background-color: #eee;
   background: transparent;
 }
+
+
+@media (max-width: 946px) {
+  .header {
+    background-color: #eee;
+
+  }
+
+}
+
 
 .videoContainer {
   position: absolute;
@@ -21,9 +32,10 @@
   height: 100%;
   z-index: 100;
   overflow: hidden;
+
 }
 
-.videoContainer > video {
+.videoContainer>video {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,14 +67,19 @@
     padding-bottom: 1.25rem;
   }
 }
+
 .titleContainer h1 {
-  color: #eee;
+  color: goldenrod;
+  font-weight: 900;
+  font-size: 7rem;
+  display: none;
 }
 
 .titleSection {
   position: relative;
   display: flex;
-  align-items: center;
+
+  align-items: right;
   min-height: 25rem;
   height: 70vh;
   max-height: 28.13rem;
@@ -98,6 +115,7 @@
     padding-bottom: 1.25rem;
   }
 }
+
 @media (min-width: 768px) {
   .titleSection {
     padding-left: 1.25rem;

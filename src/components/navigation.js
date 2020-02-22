@@ -22,15 +22,17 @@ export default () => (
         zIndex: '900',
         background: 'transparent',
       }}
-    >
-      Logo
-    </div>
+    ></div>
     <ul className={styles.navigation}>
       <li className={styles.navigationItem}>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <a>Home</a>
+        </Link>
       </li>
       <li className={styles.navigationItem}>
-        <Link to="/blog/">Blog</Link>
+        <Link to="/blog/">
+          <a>Blog</a>
+        </Link>
       </li>
     </ul>
   </nav>
